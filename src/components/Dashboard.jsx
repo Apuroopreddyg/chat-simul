@@ -8,7 +8,7 @@ import './Dashboard.css';
 
 const apiUrl = import.meta.env.VITE_API_URL;
 // Set up Socket.io client
-const socket = io("http://localhost:5000", {
+const socket = io(`${apiUrl}`, {
   transports: ['websocket', 'polling'],
 });
 
@@ -47,7 +47,7 @@ function Dashboard() {
       }
     }
 
-    fetch(`http://localhost:5000/contacts`, {
+    fetch(`${apiUrl}/contacts`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
@@ -79,7 +79,7 @@ function Dashboard() {
   const handleContactClick = (contactName) => {
     setSelectedContact(contactName);
 
-    fetch(`http://localhost:5000/messages/${contactName}`, {
+    fetch(`${apiUrl}/messages/${contactName}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
